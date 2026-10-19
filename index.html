@@ -313,6 +313,216 @@ textarea.field { resize:vertical; min-height:85px; }
   min-height: 52px;
 }
 
+/* 전화 앱 - 최근 통화 화면 */
+.phone-recents {
+  background: #000;
+  color: #f5f5f7;
+  min-height: 100%;
+  height: 100%;
+  padding: 8px 16px 100px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: none;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.phone-recents::-webkit-scrollbar {
+  display: none;
+}
+
+.phone-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 4px 0 24px;
+}
+
+.phone-toolbar > button {
+  flex-shrink: 0;
+  color: #f5f5f7;
+  background: #1c1c1e;
+  border: 1px solid #333;
+  border-radius: 28px;
+  min-width: 48px;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.phone-filter {
+  display: flex;
+  padding: 4px;
+  background: #1c1c1e;
+  border: 1px solid #333;
+  border-radius: 28px;
+}
+
+.phone-filter button {
+  background: transparent;
+  color: #f5f5f7;
+  border: 0;
+  border-radius: 24px;
+  padding: 10px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.phone-filter button.selected {
+  background: #48484a;
+}
+
+.phone-toolbar .phone-menu {
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+  font-size: 20px;
+}
+
+.phone-heading {
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  font-weight: 750;
+  margin: 0 0 20px;
+}
+
+.phone-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 28px;
+  background: #1c1c1e;
+  margin-bottom: 24px;
+  color: #a1a1a6;
+}
+
+.phone-search input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-size: 16px;
+}
+
+.phone-search input::placeholder {
+  color: #8e8e93;
+}
+
+.phone-call-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 88px;
+  border-bottom: 1px solid #303034;
+}
+
+.phone-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.phone-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #77718d, #302944);
+  color: white;
+  font-size: 23px;
+  font-weight: 650;
+}
+
+.phone-person-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.phone-person-info strong {
+  font-size: 17px;
+  font-weight: 550;
+}
+
+.phone-person-info small {
+  color: #8e8e93;
+  font-size: 14px;
+}
+
+.phone-call-date {
+  flex-shrink: 0;
+  color: #8e8e93;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.phone-info {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: #1c1c1e;
+  color: #0a84ff;
+  font-size: 26px;
+}
+
+.phone-tabbar {
+  position: sticky;
+  bottom: -1px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2px;
+  margin: 16px -8px -88px;
+  padding: 10px 4px 12px;
+  border: 1px solid #38383a;
+  border-radius: 28px;
+  background: #202023f5;
+  backdrop-filter: blur(20px);
+}
+
+.phone-tabbar button {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: #f5f5f7;
+  font-size: 22px;
+}
+
+.phone-tabbar button small {
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.phone-tabbar button.active {
+  color: #0a84ff;
+}
+
 </style>
 </head>
 <body>
@@ -700,13 +910,78 @@ function editNote(id) {
   else data.notes.unshift({id:data.nextId++,title,text});
   persist();renderApp();
 }
+
 function phoneHTML() {
-  return `<div class="dial-display" id="dialDisplay">${esc(phoneNumber)||'<span class="muted">번호 입력</span>'}</div>
-    <div class="dial-grid">${["1","2","3","4","5","6","7","8","9","*","0","#"].map(k=>`<button class="dial-key" onclick="phoneNumber+='${k}';renderApp()">${k}</button>`).join("")}</div>
-    <button class="call-button" onclick="toast('실제 전화 연결은 지원하지 않습니다.')">☎</button>
-    <button class="secondary full" onclick="phoneNumber=phoneNumber.slice(0,-1);renderApp()">⌫　번호 지우기</button>
-    <p class="muted" style="text-align:center">가상 다이얼 패드 · 실제 전화는 걸리지 않습니다.</p>`;
+  const calls = [
+    { name: "안수호", type: "out", detail: "휴대전화", date: "오후 6:19" },
+    { name: "아버지", type: "in", detail: "휴대전화", date: "어제" },
+    { name: "오범석", type: "out", detail: "휴대전화", date: "어제" },
+    { name: "영이", type: "in", detail: "휴대전화", date: "토요일" },
+    { name: "안수호", type: "in", detail: "휴대전화 (2)", date: "금요일" },
+    { name: "오범석", type: "missed", detail: "휴대전화", date: "금요일" },
+    { name: "영이", type: "out", detail: "휴대전화", date: "목요일" },
+    { name: "아버지", type: "in", detail: "휴대전화 (2)", date: "수요일" }
+  ];
+
+  return `
+    <div class="phone-recents">
+      <div class="phone-toolbar">
+        <button onclick="toast('편집 기능은 다음 단계에서 추가할게요.')">편집</button>
+        <div class="phone-filter">
+          <button class="selected" onclick="phoneFilter='all';renderApp()">모두</button>
+          <button onclick="phoneFilter='missed';renderApp()">부재중 전화</button>
+        </div>
+        <button class="phone-menu" onclick="toast('통화 목록 메뉴')">☰</button>
+      </div>
+
+      <h1 class="phone-heading">최근 통화</h1>
+
+      <div class="phone-search">
+        <span>⌕</span>
+        <input placeholder="검색" oninput="phoneSearch=this.value;renderApp();restorePhoneSearch()" id="phoneSearchInput" />
+        <span>🎙</span>
+      </div>
+
+      <div class="phone-call-list">
+        ${calls
+          .filter(c => (typeof phoneFilter === "undefined" || phoneFilter === "all" || c.type === "missed"))
+          .filter(c => !phoneSearch || c.name.includes(phoneSearch))
+          .map(c => `
+            <div class="phone-call-row">
+              <button class="phone-person" onclick="toast('${c.name} · 가상 통화 기록')">
+                <span class="phone-avatar">${esc(c.name.charAt(0))}</span>
+                <span class="phone-person-info">
+                  <strong style="${c.type === "missed" ? "color:#ff453a" : ""}">${esc(c.name)}</strong>
+                  <small>${c.type === "out" ? "↗" : c.type === "missed" ? "↙" : "↙"} ${esc(c.detail)}</small>
+                </span>
+              </button>
+              <span class="phone-call-date">${esc(c.date)}</span>
+              <button class="phone-info" onclick="toast('${c.name} · 통화 상세 정보')">ⓘ</button>
+            </div>
+          `).join("")}
+      </div>
+
+      <div class="phone-tabbar">
+        <button onclick="toast('즐겨찾기는 다음 단계에서 추가할게요.')">★<small>즐겨찾기</small></button>
+        <button class="active">◷<small>최근 통화</small></button>
+        <button onclick="toast('연락처는 다음 단계에서 추가할게요.')">●<small>연락처</small></button>
+        <button onclick="phoneTab='keypad';renderApp()">⠿<small>키패드</small></button>
+        <button onclick="toast('음성 사서함은 다음 단계에서 추가할게요.')">◉<small>음성 사서함</small></button>
+      </div>
+    </div>`;
 }
+  
+let phoneSearch = "";
+let phoneFilter = "all";
+
+function restorePhoneSearch() {
+  const input = document.getElementById("phoneSearchInput");
+  if (input) {
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+  }
+}
+
 function calendarHTML() {
   const monthNames=["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
   const first=new Date(currentYear,currentMonth,1).getDay();
