@@ -1211,6 +1211,34 @@ textarea.field { resize:vertical; min-height:85px; }
 .calling-controls button.calling-end span svg {
   transform: rotate(225deg) !important;
 }
+  
+/* 안수호 이름을 굵게 */
+#appScreen.phone-fullscreen .phone-calling .calling-contact h1 {
+  font-weight: 700 !important;
+}
+
+/* 통화 버튼 크기 줄이기 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button span {
+  width: 82px !important;
+  height: 82px !important;
+  min-width: 82px !important;
+  min-height: 82px !important;
+}
+
+/* 빨간 종료 버튼도 같은 크기로 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end span {
+  width: 82px !important;
+  height: 82px !important;
+  min-width: 82px !important;
+  min-height: 82px !important;
+}
+
+/* 버튼 묶음을 조금 더 아래로 이동 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls {
+  margin-bottom: 65px !important;
+  row-gap: 20px !important;
+}
+
 </style>
 
 <script>
@@ -1644,7 +1672,7 @@ if (currentTab === "calling") {
           <small>오디오</small>
         </button>
 
-        <button onclick="toast('FaceTime은 사용할 수 없어요.')">
+        <button onclick="this.classList.toggle('selected')">
           <span>
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <rect x="5" y="11" width="25" height="26" rx="5"
@@ -1670,7 +1698,7 @@ if (currentTab === "calling") {
           <small>소리 끔</small>
         </button>
 
-        <button onclick="toast('추가 통화 기능은 준비 중이에요.')">
+        <button onclick="this.classList.toggle('selected')">
           <span>
             <svg viewBox="0 0 48 48" aria-hidden="true">
               <circle cx="10" cy="24" r="3.5" fill="currentColor"/>
@@ -1696,7 +1724,7 @@ if (currentTab === "calling") {
           <small>종료</small>
         </button>
 
-        <button onclick="toast('키패드는 다음 단계에서 추가할게요.')">
+        <button onclick="this.classList.toggle('selected')">
           <span>
             <svg viewBox="0 0 48 48" aria-hidden="true">
               ${Array.from({length:9},(_,i)=>
