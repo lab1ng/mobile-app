@@ -1153,6 +1153,61 @@ textarea.field { resize:vertical; min-height:85px; }
   transform: none;
 }
 
+/* 종료 버튼: 원 크기와 글자 위치 고정 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  transform: none;
+}
+
+/* 빨간 원을 다른 버튼과 같은 크기로 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end span {
+  width: 94px !important;
+  height: 94px !important;
+  min-width: 94px;
+  min-height: 94px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50% !important;
+  background: #ff3b30 !important;
+  border: 1px solid rgba(255,255,255,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: none !important;
+  box-sizing: border-box;
+}
+
+/* 전화기 그림만 회전 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end span svg {
+  width: 38px !important;
+  height: 38px !important;
+  transform: rotate(135deg);
+  flex-shrink: 0;
+}
+
+/* 종료 글자는 원 아래 중앙에 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end small {
+  display: block;
+  position: static;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  line-height: 1.4;
+  transform: none !important;
+  white-space: nowrap;
+}
+
 </style>
 
 <script>
