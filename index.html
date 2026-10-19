@@ -1052,15 +1052,14 @@ function editNote(id) {
 }
 
 function phoneHTML() {
-  const calls = [
-    { name: "안수호", type: "out", detail: "휴대전화", date: "오후 6:19" },
-    { name: "아버지", type: "in", detail: "휴대전화", date: "어제" },
-    { name: "오범석", type: "out", detail: "휴대전화", date: "어제" },
-    { name: "영이", type: "in", detail: "휴대전화", date: "토요일" },
-    { name: "안수호", type: "in", detail: "휴대전화 (2)", date: "금요일" },
-    { name: "오범석", type: "missed", detail: "휴대전화", date: "금요일" },
-    { name: "영이", type: "out", detail: "휴대전화", date: "목요일" },
-    { name: "아버지", type: "in", detail: "휴대전화 (2)", date: "수요일" }
+const calls = [
+    { name: "선강대병원", type: "missed", detail: "부재중 전화", date: "" },
+    { name: "박후민", type: "in", detail: "휴대전화", date: "" },
+    { name: "서준태", type: "out", detail: "휴대전화", date: "" },
+    { name: "수호할머님", type: "in", detail: "휴대전화", date: "" },
+    { name: "박후민", type: "in", detail: "휴대전화", date: "" },
+    { name: "고현탁", type: "out", detail: "휴대전화", date: "" },
+    { name: "금성제", type: "missed", detail: "부재중 전화", date: "" }
   ];
 
   return `
@@ -1088,7 +1087,7 @@ function phoneHTML() {
           .filter(c => !phoneSearch || c.name.includes(phoneSearch))
           .map(c => `
             <div class="phone-call-row">
-              <button class="phone-person" onclick="toast('${c.name} · 가상 통화 기록')">
+              <button class="phone-person">
                 <span class="phone-avatar">${esc(c.name.charAt(0))}</span>
                 <span class="phone-person-info">
                   <strong style="${c.type === "missed" ? "color:#ff453a" : ""}">${esc(c.name)}</strong>
