@@ -1221,38 +1221,46 @@ function phoneHTML() {
       <button onclick="toast('음성 사서함은 다음 단계에서 추가할게요.')">◉<small>음성 사서함</small></button>
     </div>`;
 
+ 
   if (currentTab === "calling") {
     return `
       <div class="phone-recents phone-calling">
+        <div class="calling-status">연결 중</div>
+
         <div class="calling-contact">
-          <div class="calling-avatar">안</div>
           <h1>안수호</h1>
           <p>휴대전화</p>
         </div>
 
         <div class="calling-controls">
-          <button onclick="toast('음소거 기능은 실제 통화에 연결되지 않았어요.')">
-            <span>🎙</span>
-            <small>음소거</small>
-          </button>
-          <button onclick="toast('키패드 기능은 다음 단계에서 추가할게요.')">
-            <span>▦</span>
-            <small>키패드</small>
-          </button>
-          <button onclick="toast('스피커 기능은 실제 통화에 연결되지 않았어요.')">
-            <span>🔊</span>
+          <button onclick="this.classList.toggle('selected')">
+            <span>◖))</span>
             <small>오디오</small>
           </button>
-        </div>
-
-        <div class="calling-end-area">
-          <button class="calling-end" onclick="endFavoriteCall(false)">
-            ☎
+          <button onclick="toast('FaceTime은 사용할 수 없어요.')">
+            <span>▣</span>
+            <small>FaceTime</small>
           </button>
-          <small>통화 종료</small>
+          <button onclick="this.classList.toggle('selected')">
+            <span>🎙</span>
+            <small>소리 끔</small>
+          </button>
+          <button onclick="toast('추가 통화 기능은 준비 중이에요.')">
+            <span>•••</span>
+            <small>더 보기</small>
+          </button>
+          <button class="calling-end" onclick="endFavoriteCall(false)">
+            <span>☎</span>
+            <small>종료</small>
+          </button>
+          <button onclick="toast('키패드는 다음 단계에서 추가할게요.')">
+            <span>⠿</span>
+            <small>키패드</small>
+          </button>
         </div>
       </div>`;
   }
+
 
   if (currentTab === "favorites") {
     return `
