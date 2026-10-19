@@ -1026,6 +1026,50 @@ textarea.field { resize:vertical; min-height:85px; }
   font-size: 35px;
   transform: rotate(135deg);
 }
+  
+/* 가상 통화 중에는 화면 전체를 통화 배경으로 채우기 */
+#appScreen.phone-fullscreen:has(.phone-calling) {
+  background: #59636c !important;
+}
+
+#appScreen.phone-fullscreen:has(.phone-calling) .app-body {
+  top: 0 !important;
+  bottom: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: transparent !important;
+}
+
+#appScreen.phone-fullscreen:has(.phone-calling) .status {
+  background: transparent !important;
+}
+
+#appScreen.phone-fullscreen:has(.phone-calling) .home-indicator-area {
+  background: transparent !important;
+}
+
+#appScreen.phone-fullscreen .phone-calling {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+  background: linear-gradient(
+    180deg,
+    #59636c 0%,
+    #77706b 38%,
+    #69452f 70%,
+    #382d2b 100%
+  ) !important;
+}
+
 </style>
 
 <script>
