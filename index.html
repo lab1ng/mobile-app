@@ -490,6 +490,28 @@ function showPasscode() {
   document.getElementById("passMessage").textContent="iPhone을 잠금 해제하려면 암호를 입력하세요.";
   updateDots();showScreen("passScreen");
 }
+  
+let lockTouchStartY = 0;
+
+function setupLockSwipe() {
+  const lockScreen = document.getElementById("lockScreen");
+  if (!lockScreen || lockScreen.dataset.swipeReady) return;
+
+  lockScreen.dataset.swipeReady = "true";
+
+  lockScreen.addEventListener("touchstart", (event) => {
+    lockTouchStartY = event.touches[0].clientY;
+  }, { passive: true });
+
+  lockScreen.addEventListener("touchend", (event) => {
+    const endY = event.changedTouches[0].clientY;
+    const distance = lockTouchStartY - endY;
+
+    if (distance > 60) {
+      showPasscode();
+    }
+  }, { passive: true });
+}
 function digit(n) {
   if(passInput.length>=6)return;
   passInput+=n;updateDots();
@@ -506,6 +528,8 @@ function deleteDigit(){passInput=passInput.slice(0,-1);updateDots();}
 function clearPass(){passInput="";updateDots();}
 function updateDots() {
   document.querySelectorAll(".pass-dot").forEach((d,i)=>d.classList.toggle("filled",i<passInput.length));
+}
+  setupLockSwipe();
 }
 function iconHTML(app) {
   let inner=app.id==="calendar"
