@@ -593,7 +593,7 @@ textarea.field { resize:vertical; min-height:85px; }
       </div>
       <div id="passDots" style="display:flex;justify-content:center;gap:15px;padding:22px 0">
         <span class="pass-dot"></span><span class="pass-dot"></span><span class="pass-dot"></span>
-        <span class="pass-dot"></span><span class="pass-dot"></span><span class="pass-dot"></span>
+        <span class="pass-dot"></span>
       </div>
       <div id="keypad" style="width:270px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px 20px">
         <button class="pass-key" onclick="digit('1')">1</button>
@@ -817,7 +817,7 @@ textarea.field { resize:vertical; min-height:85px; }
 
 <script>
 const STORE = "morrow-iphone-v1";
-const DEFAULT_PASSCODE = "123456";
+const DEFAULT_PASSCODE = "0709";
 const APPS = [
   {id:"sns",name:"morrow.",emoji:"📸",cls:"social"},
   {id:"messages",name:"메시지",emoji:"●",cls:"messages"},
@@ -849,7 +849,7 @@ function load() {
   try {
     const x=JSON.parse(localStorage.getItem(STORE));
     if(x && Array.isArray(x.posts) && Array.isArray(x.chats)) {
-      return {...clone(initial),...x,
+      return {...clone(initial),...x,passcode:DEFAULT_PASSCODE,
         posts:x.posts.map(p=>({...p,comments:p.comments||[],liked:!!p.liked})),
         chats:x.chats.map(c=>({...c,messages:c.messages||[]})),
         notes:x.notes||[],events:x.events||[],nextId:x.nextId||100
@@ -926,15 +926,30 @@ function setupLockSwipe() {
   }, { passive: true });
 }
 function digit(n) {
-  if(passInput.length>=6)return;
-  passInput+=n;updateDots();
-  if(passInput.length===6) {
-    if(passInput===data.passcode) {
-      setTimeout(()=>{showScreen("homeScreen");renderHome();},150);
+  if (passInput.length >= 4) return;
+
+  passInput += n;
+  updateDots();
+
+  if (passInput.length === 4) {
+    if (passInput === data.passcode) {
+      setTimeout(() => {
+        showScreen("homeScreen");
+        renderHome();
+      }, 150);
     } else {
-      document.getElementById("passMessage").textContent="암호가 올바르지 않습니다. 다시 시도하세요.";
-      setTimeout(()=>{passInput="";updateDots();},650);
+      document.getElementById("passMessage").textContent =
+        "암호가 올바르지 않습니다. 다시 시도하세요.";
+
+      setTimeout(() => {
+        passInput = "";
+        updateDots();
+        document.getElementById("passMessage").textContent =
+          "iPhone을 잠금 해제하려면 암호를 입력하세요.";
+      }, 650);
     }
+  }
+}
   }
 }
 function deleteDigit(){passInput=passInput.slice(0,-1);updateDots();}
