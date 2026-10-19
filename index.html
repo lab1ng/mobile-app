@@ -1095,6 +1095,19 @@ textarea.field { resize:vertical; min-height:85px; }
 #appScreen.phone-fullscreen .phone-calling .calling-contact {
   margin-top: 8px !important;
 }
+  
+/* 통화 버튼만 화면 아래쪽에 배치 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls {
+  margin-top: auto !important;
+  margin-bottom: 100px !important;
+  flex-shrink: 0;
+}
+
+/* 이름과 버튼 사이 공간 유지 */
+#appScreen.phone-fullscreen .phone-calling .calling-contact {
+  margin-bottom: 0 !important;
+}
+
 </style>
 
 <script>
