@@ -530,7 +530,7 @@ function updateDots() {
   document.querySelectorAll(".pass-dot").forEach((d,i)=>d.classList.toggle("filled",i<passInput.length));
 }
   setupLockSwipe();
-}
+
 function iconHTML(app) {
   let inner=app.id==="calendar"
     ? `<div style="text-align:center"><b>${new Date().toLocaleDateString("ko-KR",{weekday:"short"})}</b><strong>${new Date().getDate()}</strong></div>`
