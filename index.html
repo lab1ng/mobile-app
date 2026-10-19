@@ -1266,6 +1266,22 @@ textarea.field { resize:vertical; min-height:85px; }
   row-gap: 18px !important;
 }
 
+.phone-mic-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 40px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.phone-mic-icon svg {
+  display: block;
+  width: 30px;
+  height: 38px;
+}
+
 </style>
 
 <script>
@@ -1832,9 +1848,22 @@ if (currentTab === "calling") {
       <h1 class="phone-heading">최근 통화</h1>
 
       <div class="phone-search">
-        <span>⌕</span>
-        <input placeholder="검색" oninput="phoneSearch=this.value;renderApp();restorePhoneSearch()" id="phoneSearchInput" />
-        <span>🎙</span>
+        <span>⌕</span>       
+<input placeholder="검색" id="phoneSearchInput" disabled />
+        
+<span class="phone-mic-icon">
+  <svg viewBox="0 0 32 40" aria-hidden="true">
+    <rect x="11" y="2" width="10" height="23" rx="5"
+      fill="none" stroke="currentColor" stroke-width="2.8"/>
+    <path d="M5 17v2a11 11 0 0 0 22 0v-2"
+      fill="none" stroke="currentColor" stroke-width="2.8"
+      stroke-linecap="round"/>
+    <path d="M16 30v6M10 36h12"
+      fill="none" stroke="currentColor" stroke-width="2.8"
+      stroke-linecap="round"/>
+  </svg>
+</span>
+
       </div>
 
       <div class="phone-call-list">
