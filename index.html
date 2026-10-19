@@ -718,7 +718,101 @@ textarea.field { resize:vertical; min-height:85px; }
   background: #000;
   color: #fff;
 }
+.phone-calling {
+  position: relative;
+  background: #242426;
+  color: white;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: 70px 24px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.calling-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.calling-avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #77718d, #302944);
+  font-size: 44px;
+  margin-bottom: 24px;
+}
+
+.calling-contact h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.calling-contact p {
+  color: #c4c4c8;
+  margin-top: 10px;
+}
+
+.calling-controls {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.calling-controls button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  border: 0;
+  background: transparent;
+}
+
+.calling-controls button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #48484a;
+  font-size: 25px;
+}
+
+.calling-controls button small,
+.calling-end-area small {
+  font-size: 12px;
+  color: white;
+}
+
+.calling-end-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.calling-end {
+  width: 72px;
+  height: 72px;
+  border: 0;
+  border-radius: 50%;
+  background: #ff453a;
+  color: white;
+  font-size: 34px;
+  transform: rotate(135deg);
+}
 </style>
 
 <script>
@@ -1078,6 +1172,39 @@ function phoneHTML() {
       <button onclick="phoneTab='keypad';renderApp()">⠿<small>키패드</small></button>
       <button onclick="toast('음성 사서함은 다음 단계에서 추가할게요.')">◉<small>음성 사서함</small></button>
     </div>`;
+
+  if (currentTab === "calling") {
+    return `
+      <div class="phone-recents phone-calling">
+        <div class="calling-contact">
+          <div class="calling-avatar">안</div>
+          <h1>안수호</h1>
+          <p>휴대전화</p>
+        </div>
+
+        <div class="calling-controls">
+          <button onclick="toast('음소거 기능은 실제 통화에 연결되지 않았어요.')">
+            <span>🎙</span>
+            <small>음소거</small>
+          </button>
+          <button onclick="toast('키패드 기능은 다음 단계에서 추가할게요.')">
+            <span>▦</span>
+            <small>키패드</small>
+          </button>
+          <button onclick="toast('스피커 기능은 실제 통화에 연결되지 않았어요.')">
+            <span>🔊</span>
+            <small>오디오</small>
+          </button>
+        </div>
+
+        <div class="calling-end-area">
+          <button class="calling-end" onclick="phoneTab='favorites';renderApp()">
+            ☎
+          </button>
+          <small>통화 종료</small>
+        </div>
+      </div>`;
+  }
 
   if (currentTab === "favorites") {
     return `
