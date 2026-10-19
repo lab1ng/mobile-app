@@ -391,11 +391,11 @@ textarea.field { resize:vertical; min-height:85px; }
   display: flex;
   align-items: center;
   gap: 10px;
-  height: 48px;
+  height: 44px;
   padding: 0 14px;
   border-radius: 28px;
   background: #1c1c1e;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   color: #a1a1a6;
 }
 
@@ -418,7 +418,7 @@ textarea.field { resize:vertical; min-height:85px; }
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 88px;
+  min-height: 76px;
   border-bottom: 1px solid #303034;
 }
 
@@ -457,13 +457,12 @@ textarea.field { resize:vertical; min-height:85px; }
 }
 
 .phone-person-info strong {
-  font-size: 17px;
-  font-weight: 550;
+  font-size: 16px;
 }
 
 .phone-person-info small {
   color: #8e8e93;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .phone-call-date {
@@ -1052,6 +1051,7 @@ function editNote(id) {
 }
 
 function phoneHTML() {
+  const currentTab = typeof phoneTab === "undefined" ? "recents" : phoneTab;
 const calls = [
     { name: "선강대병원", type: "missed", detail: "부재중 전화", date: "" },
     { name: "박후민", type: "in", detail: "휴대전화", date: "" },
@@ -1101,8 +1101,8 @@ const calls = [
       </div>
 
       <div class="phone-tabbar">
-        <button onclick="toast('즐겨찾기는 다음 단계에서 추가할게요.')">★<small>즐겨찾기</small></button>
-        <button class="active">◷<small>최근 통화</small></button>
+      <button class="${currentTab === "favorites" ? "active" : ""}" onclick="phoneTab='favorites';renderApp()">★<small>즐겨찾기</small></button>
+      <button class="${currentTab === "recents" ? "active" : ""}" onclick="phoneTab='recents';renderApp()">◷<small>최근 통화</small></button>
         <button onclick="toast('연락처는 다음 단계에서 추가할게요.')">●<small>연락처</small></button>
         <button onclick="phoneTab='keypad';renderApp()">⠿<small>키패드</small></button>
         <button onclick="toast('음성 사서함은 다음 단계에서 추가할게요.')">◉<small>음성 사서함</small></button>
