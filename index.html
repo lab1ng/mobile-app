@@ -1282,6 +1282,31 @@ textarea.field { resize:vertical; min-height:85px; }
   height: 38px;
 }
 
+.phone-search .phone-mic-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 40px !important;
+  flex-shrink: 0 !important;
+  color: #fff !important;
+}
+
+.phone-search .phone-mic-icon svg {
+  display: block !important;
+  width: 30px !important;
+  height: 38px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#phoneSearchInput {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  cursor: default !important;
+}
+
 </style>
 
 <script>
@@ -1847,24 +1872,32 @@ if (currentTab === "calling") {
 
       <h1 class="phone-heading">최근 통화</h1>
 
-      <div class="phone-search">
-        <span>⌕</span>       
-<input placeholder="검색" id="phoneSearchInput" disabled />
-        
-<span class="phone-mic-icon">
-  <svg viewBox="0 0 32 40" aria-hidden="true">
-    <rect x="11" y="2" width="10" height="23" rx="5"
-      fill="none" stroke="currentColor" stroke-width="2.8"/>
-    <path d="M5 17v2a11 11 0 0 0 22 0v-2"
-      fill="none" stroke="currentColor" stroke-width="2.8"
-      stroke-linecap="round"/>
-    <path d="M16 30v6M10 36h12"
-      fill="none" stroke="currentColor" stroke-width="2.8"
-      stroke-linecap="round"/>
-  </svg>
-</span>
+    
+<div class="phone-search">
+  <span>⌕</span>
+  <input
+    placeholder="검색"
+    id="phoneSearchInput"
+    type="text"
+    disabled
+    readonly
+    tabindex="-1"
+    aria-disabled="true"
+  />
+  <span class="phone-mic-icon">
+    <svg viewBox="0 0 32 40" aria-hidden="true">
+      <rect x="11" y="2" width="10" height="23" rx="5"
+        fill="none" stroke="currentColor" stroke-width="2.8"/>
+      <path d="M5 17v2a11 11 0 0 0 22 0v-2"
+        fill="none" stroke="currentColor" stroke-width="2.8"
+        stroke-linecap="round"/>
+      <path d="M16 30v6M10 36h12"
+        fill="none" stroke="currentColor" stroke-width="2.8"
+        stroke-linecap="round"/>
+    </svg>
+  </span>
+</div>
 
-      </div>
 
       <div class="phone-call-list">
         ${calls
