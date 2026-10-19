@@ -1619,6 +1619,7 @@ let callStartedAt = 0;
 
 
 
+
 function startFavoriteCall() {
   clearTimeout(callTimer);
 
@@ -1629,18 +1630,19 @@ function startFavoriteCall() {
     data.missedFavoriteCalls = [];
   }
 
-  const previousCount = data.missedFavoriteCalls.length + 1;
+  const previousCount = data.missedFavoriteCalls.length
+    ? Number(data.missedFavoriteCalls[0].name.match(/\((\d+)\)/)?.[1] || 0)
+    : 0;
 
-  data.missedFavoriteCalls.unshift({
-    name: `안수호 (${previousCount})`,
+  data.missedFavoriteCalls = [{
+    name: `안수호 (${previousCount + 1})`,
     type: "missed",
     detail: "부재중 전화",
     date: "방금"
-  });
+  }];
 
   save();
 }
-
 
 
 
