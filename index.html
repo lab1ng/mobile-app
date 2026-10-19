@@ -523,6 +523,44 @@ textarea.field { resize:vertical; min-height:85px; }
   color: #0a84ff;
 }
 
+/* 전화 앱 전체 화면 */
+#appScreen.phone-fullscreen {
+  background: #000 !important;
+}
+
+#appScreen.phone-fullscreen .app-top,
+#appScreen.phone-fullscreen .app-nav {
+  display: none !important;
+}
+
+#appScreen.phone-fullscreen .app-body {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  padding: 0;
+  margin: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+#appScreen.phone-fullscreen .home-indicator-area {
+  position: absolute;
+  z-index: 20;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+}
+
+#appScreen.phone-fullscreen .status {
+  position: relative;
+  z-index: 21;
+  background: #000;
+  color: #fff;
+}
+
 </style>
 </head>
 <body>
@@ -759,7 +797,8 @@ function goHome() {
   renderHome();
 }
 function openApp(id) {
-  currentApp=id;activeChat=null;
+currentApp=id;activeChat=null;
+  document.getElementById("appScreen").classList.toggle("phone-fullscreen", id === "phone");
   document.getElementById("appTitle").textContent=APPS.find(a=>a.id===id)?.name||"앱";
   document.getElementById("appAction").textContent=
     ({sns:"＋",messages:"＋",photos:"",settings:"",notes:"＋",phone:"",calendar:"＋"})[id]||"";
