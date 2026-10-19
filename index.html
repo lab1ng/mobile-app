@@ -683,10 +683,22 @@ textarea.field { resize:vertical; min-height:85px; }
 #appScreen.phone-fullscreen .phone-tabbar {
   position: absolute;
   z-index: 25;
-  bottom: 34px;
+  bottom: 12px;
   left: 10px;
   right: 10px;
   margin: 0;
+  flex-shrink: 0;
+}
+#appScreen.phone-fullscreen .phone-recents {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+#appScreen.phone-fullscreen .phone-call-list {
+  padding-bottom: 90px;
 }
 
 /* 시간 · 신호 · Wi-Fi · 배터리 표시 */
@@ -853,6 +865,34 @@ function goHome() {
   showScreen("homeScreen");
   renderHome();
 }
+  
+let phoneSwipeStartX = 0;
+let phoneSwipeStartY = 0;
+
+function setupPhoneBackSwipe() {
+  const screen = document.getElementById("appScreen");
+  if (!screen || screen.dataset.backSwipeReady) return;
+
+  screen.dataset.backSwipeReady = "true";
+
+  screen.addEventListener("touchstart", (event) => {
+    if (currentApp !== "phone") return;
+    phoneSwipeStartX = event.changedTouches[0].clientX;
+    phoneSwipeStartY = event.changedTouches[0].clientY;
+  }, { passive: true });
+
+  screen.addEventListener("touchend", (event) => {
+    if (currentApp !== "phone") return;
+
+    const dx = event.changedTouches[0].clientX - phoneSwipeStartX;
+    const dy = event.changedTouches[0].clientY - phoneSwipeStartY;
+
+    if (dx > 90 && Math.abs(dy) < 70) {
+      goHome();
+    }
+  }, { passive: true });
+}
+
 function openApp(id) {
 currentApp=id;activeChat=null;
   document.getElementById("appScreen").classList.toggle("phone-fullscreen", id === "phone");
@@ -862,6 +902,7 @@ currentApp=id;activeChat=null;
   document.getElementById("appAction").style.display=
     ["sns","messages","notes","calendar"].includes(id)?"block":"none";
   showScreen("appScreen");
+  setupPhoneBackSwipe();
   renderApp();
 }
 function appPrimaryAction() {
