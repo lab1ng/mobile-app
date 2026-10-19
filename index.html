@@ -1239,6 +1239,33 @@ textarea.field { resize:vertical; min-height:85px; }
   row-gap: 20px !important;
 }
 
+/* 통화 버튼 크기와 위치 추가 조정 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button span {
+  width: 74px !important;
+  height: 74px !important;
+  min-width: 74px !important;
+  min-height: 74px !important;
+}
+
+#appScreen.phone-fullscreen .phone-calling .calling-controls button span svg {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+/* 빨간 종료 버튼도 동일한 크기 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end span {
+  width: 74px !important;
+  height: 74px !important;
+  min-width: 74px !important;
+  min-height: 74px !important;
+}
+
+/* 버튼 묶음을 더 아래로 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls {
+  margin-bottom: 25px !important;
+  row-gap: 18px !important;
+}
+
 </style>
 
 <script>
