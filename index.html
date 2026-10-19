@@ -1618,8 +1618,12 @@ let callTimer = null;
 let callStartedAt = 0;
 
 
+
 function startFavoriteCall() {
   clearTimeout(callTimer);
+
+  phoneTab = "calling";
+  renderApp();
 
   if (!data.missedFavoriteCalls) {
     data.missedFavoriteCalls = [];
@@ -1635,16 +1639,8 @@ function startFavoriteCall() {
   });
 
   save();
-
-  phoneTab = "calling";
-  renderApp();
-
-  callTimer = setTimeout(() => {
-    phoneTab = "favorites";
-    renderApp();
-    callTimer = null;
-  }, 10000);
 }
+
 
 
 
