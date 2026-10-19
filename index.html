@@ -535,10 +535,13 @@ textarea.field { resize:vertical; min-height:85px; }
 
 #appScreen.phone-fullscreen .app-body {
   position: absolute;
-  inset: 0;
+  top: 56px;
+  bottom: 82px;
+  left: 0;
+  right: 0;
   width: 100%;
-  height: 100%;
-  max-height: 100%;
+  height: auto;
+  max-height: none;
   padding: 0;
   margin: 0;
   background: #000;
@@ -648,6 +651,60 @@ textarea.field { resize:vertical; min-height:85px; }
 }
 .pass-key:active { background:#d0d0d7; }
 .pass-delete { border:0;background:white;font-size:21px; }
+ 
+/* 전화 화면 내부 여백 */
+#appScreen.phone-fullscreen .phone-recents {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  padding: 10px 16px 12px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* 편집 · 모두 · 부재중 전화 */
+#appScreen.phone-fullscreen .phone-toolbar {
+  flex-shrink: 0;
+  margin-top: 4px;
+  margin-bottom: 24px;
+  min-height: 44px;
+}
+
+#appScreen.phone-fullscreen .phone-heading {
+  margin-top: 0;
+}
+
+/* 통화 목록이 남은 공간을 사용 */
+#appScreen.phone-fullscreen .phone-call-list {
+  padding-bottom: 12px;
+}
+
+/* 하단 탭 메뉴를 화면 아래에 고정 */
+#appScreen.phone-fullscreen .phone-tabbar {
+  position: absolute;
+  z-index: 25;
+  bottom: 34px;
+  left: 10px;
+  right: 10px;
+  margin: 0;
+}
+
+/* 시간 · 신호 · Wi-Fi · 배터리 표시 */
+#appScreen.phone-fullscreen .status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  background: #000;
+  color: #fff;
+}
+
 </style>
 
 <script>
