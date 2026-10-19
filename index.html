@@ -1628,7 +1628,8 @@ function startFavoriteCall() {
   }, 10000);
 }
 
-function endFavoriteCall(missed = false) {
+
+function endFavoriteCall(missed = true) {
   clearTimeout(callTimer);
   callTimer = null;
 
@@ -1637,8 +1638,10 @@ function endFavoriteCall(missed = false) {
       data.missedFavoriteCalls = [];
     }
 
+    const previousCount = data.missedFavoriteCalls.length + 1;
+
     data.missedFavoriteCalls.unshift({
-      name: "안수호",
+      name: `안수호 (${previousCount})`,
       type: "missed",
       detail: "부재중 전화",
       date: "방금"
@@ -1652,10 +1655,13 @@ function endFavoriteCall(missed = false) {
 }
 
 
+
 function phoneHTML() {
   const currentTab = typeof phoneTab === "undefined" ? "recents" : phoneTab;
 
+ 
   const calls = [
+    ...(data.missedFavoriteCalls || []),
     { name: "선강대병원", type: "missed", detail: "부재중 전화", date: "" },
     { name: "박후민", type: "in", detail: "휴대전화", date: "" },
     { name: "서준태", type: "out", detail: "휴대전화", date: "" },
