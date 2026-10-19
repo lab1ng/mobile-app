@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>morrow.</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eeeeF4;
+      font-family: Arial, sans-serif;
+      color: #262626;
+    }
+    .phone {
+      max-width: 390px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+    }
+    header {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .stories {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .story { text-align: center; font-size: 12px; }
+    .avatar {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 6px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #eee4ff;
+      font-size: 26px;
+    }
+    .post { padding: 16px; border-bottom: 1px solid #eee; }
+    .user { font-weight: bold; margin-bottom: 12px; }
+    .photo {
+      height: 280px;
+      border-radius: 5px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #d7c8ef, #f5d3df, #f5dfbd);
+      font-size: 75px;
+    }
+    .actions { padding: 12px 0; }
+    button {
+      border: 0;
+      background: none;
+      font-size: 23px;
+      cursor: pointer;
+    }
+    .caption { font-size: 14px; line-height: 1.6; }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 16px 0;
+      border-top: 1px solid #eee;
+      position: sticky;
+      bottom: 0;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <header>morrow.</header>
+
+    <div class="stories">
+      <div class="story">
+        <div class="avatar">＋</div>내 스토리
+      </div>
+      <div class="story">
+        <div class="avatar">🌙</div>seo.ian
+      </div>
+      <div class="story">
+        <div class="avatar">🪐</div>yujin.zip
+      </div>
+      <div class="story">
+        <div class="avatar">☁️</div>dawn
+      </div>
+    </div>
+
+    <article class="post">
+      <div class="user">🌙　seo.ian</div>
+      <div class="photo">🌙</div>
+      <div class="actions">
+        <button id="likeButton" onclick="likePost()">♡</button>
+        <button onclick="alert('댓글 기능은 다음 단계에서 만들게!')">♧</button>
+        <span id="likes">좋아요 28개</span>
+      </div>
+      <div class="caption">
+        <b>seo.ian</b>
+        아무것도 하지 않은 날이 오래 기억될 때가 있다.
+        오늘이 조금 그런 날.
+      </div>
+    </article>
+
+    <article class="post">
+      <div class="user">🪐　yujin.zip</div>
+      <div class="photo" style="background:linear-gradient(135deg,#c4d5cc,#f1e5d5)">
+        ☕
+      </div>
+      <div class="actions">♡　♧　➤</div>
+      <div class="caption">
+        <b>yujin.zip</b>
+        요즘 자주 듣는 노래. 밤에 들으면 더 좋다.
+      </div>
+    </article>
+
+    <nav>
+      <button onclick="alert('홈 화면이야!')">⌂</button>
+      <button onclick="alert('검색 기능은 다음 단계에서 만들게!')">⌕</button>
+      <button onclick="alert('게시글 작성 기능은 다음 단계에서 만들게!')">⊞</button>
+      <button onclick="alert('메시지 기능은 다음 단계에서 만들게!')">♡</button>
+      <button onclick="alert('프로필 기능은 다음 단계에서 만들게!')">◎</button>
+    </nav>
+  </div>
+
+  <script>
+    let liked = false;
+    let count = 28;
+
+    function likePost() {
+      liked = !liked;
+      count += liked ? 1 : -1;
+      document.getElementById("likeButton").textContent =
+        liked ? "♥" : "♡";
+      document.getElementById("likeButton").style.color =
+        liked ? "#ed315e" : "#262626";
+      document.getElementById("likes").textContent =
+        "좋아요 " + count + "개";
+    }
+  </script>
+</body>
+</html>
