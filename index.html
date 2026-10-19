@@ -1617,16 +1617,35 @@ let phoneTab = "recents";
 let callTimer = null;
 let callStartedAt = 0;
 
+
 function startFavoriteCall() {
   clearTimeout(callTimer);
-  callStartedAt = Date.now();
+
+  if (!data.missedFavoriteCalls) {
+    data.missedFavoriteCalls = [];
+  }
+
+  const previousCount = data.missedFavoriteCalls.length + 1;
+
+  data.missedFavoriteCalls.unshift({
+    name: `안수호 (${previousCount})`,
+    type: "missed",
+    detail: "부재중 전화",
+    date: "방금"
+  });
+
+  save();
+
   phoneTab = "calling";
   renderApp();
 
   callTimer = setTimeout(() => {
-    endFavoriteCall(true);
+    phoneTab = "favorites";
+    renderApp();
+    callTimer = null;
   }, 10000);
 }
+
 
 
 function endFavoriteCall(missed = true) {
