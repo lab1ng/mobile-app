@@ -1051,6 +1051,12 @@ function editNote(id) {
 }
 
 let phoneTab = "recents";
+  
+function startFavoriteCall() {
+  phoneTab = "calling";
+  renderApp();
+}
+
 function phoneHTML() {
   const currentTab = typeof phoneTab === "undefined" ? "recents" : phoneTab;
 
