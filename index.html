@@ -1108,6 +1108,51 @@ textarea.field { resize:vertical; min-height:85px; }
   margin-bottom: 0 !important;
 }
 
+/* 통화 아이콘 SVG 정렬 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 94px;
+  height: 94px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+#appScreen.phone-fullscreen .phone-calling .calling-controls button span svg {
+  display: block;
+  width: 38px;
+  height: 38px;
+  overflow: visible;
+}
+
+/* 빨간 종료 버튼은 원형 유지 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end span {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  background: #ff3b30;
+  border: 1px solid rgba(255,255,255,.2);
+  transform: none;
+}
+
+/* 전화기 아이콘만 흰색으로 표시 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button.calling-end span svg {
+  width: 38px;
+  height: 38px;
+  transform: rotate(135deg);
+}
+
+/* 버튼 글씨 정렬 */
+#appScreen.phone-fullscreen .phone-calling .calling-controls button small {
+  display: block;
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
+  transform: none;
+}
+
 </style>
 
 <script>
@@ -1517,44 +1562,91 @@ function phoneHTML() {
     </div>`;
 
  
-  if (currentTab === "calling") {
-    return `
-      <div class="phone-recents phone-calling">
-        <div class="calling-status">연결 중</div>
+  
+if (currentTab === "calling") {
+  return `
+    <div class="phone-recents phone-calling">
+      <div class="calling-status">연결 중</div>
 
-        <div class="calling-contact">
-          <h1>안수호</h1>
-          <p>휴대전화</p>
-        </div>
+      <div class="calling-contact">
+        <h1>안수호</h1>
+        <p>휴대전화</p>
+      </div>
 
-        <div class="calling-controls">
-          <button onclick="this.classList.toggle('selected')">
-            <span>◖))</span>
-            <small>오디오</small>
-          </button>
-          <button onclick="toast('FaceTime은 사용할 수 없어요.')">
-            <span>▣</span>
-            <small>FaceTime</small>
-          </button>
-          <button onclick="this.classList.toggle('selected')">
-            <span>🎙</span>
-            <small>소리 끔</small>
-          </button>
-          <button onclick="toast('추가 통화 기능은 준비 중이에요.')">
-            <span>•••</span>
-            <small>더 보기</small>
-          </button>
-          <button class="calling-end" onclick="endFavoriteCall(false)">
-            <span>☎</span>
-            <small>종료</small>
-          </button>
-          <button onclick="toast('키패드는 다음 단계에서 추가할게요.')">
-            <span>⠿</span>
-            <small>키패드</small>
-          </button>
-        </div>
-      </div>`;
-  }
+      <div class="calling-controls">
+        <button onclick="this.classList.toggle('selected')">
+          <span>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M7 18h8l12-10v32L15 30H7z" fill="currentColor"/>
+              <path d="M33 17q9 7 0 14M37 11q15 13 0 26"
+                fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round"/>
+            </svg>
+          </span>
+          <small>오디오</small>
+        </button>
+
+        <button onclick="toast('FaceTime은 사용할 수 없어요.')">
+          <span>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <rect x="5" y="11" width="25" height="26" rx="5"
+                fill="none" stroke="currentColor" stroke-width="4"/>
+              <path d="M30 19l12-7v24l-12-7z" fill="currentColor"/>
+            </svg>
+          </span>
+          <small>FaceTime</small>
+        </button>
+
+        <button onclick="this.classList.toggle('selected')">
+          <span>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <rect x="18" y="5" width="12" height="25" rx="6"
+                fill="currentColor"/>
+              <path d="M11 23v2a13 13 0 0 0 26 0v-2M24 38v6M17 44h14"
+                fill="none" stroke="currentColor" stroke-width="3"
+                stroke-linecap="round"/>
+              <path d="M7 7l34 34" fill="none" stroke="currentColor"
+                stroke-width="3.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <small>소리 끔</small>
+        </button>
+
+        <button onclick="toast('추가 통화 기능은 준비 중이에요.')">
+          <span>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <circle cx="10" cy="24" r="3.5" fill="currentColor"/>
+              <circle cx="24" cy="24" r="3.5" fill="currentColor"/>
+              <circle cx="38" cy="24" r="3.5" fill="currentColor"/>
+            </svg>
+          </span>
+          <small>더 보기</small>
+        </button>
+
+        <button class="calling-end" onclick="endFavoriteCall(false)">
+          <span>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path d="M7 28c10-11 24-11 34 0l-5 8c-1 2-4 2-6 1l-4-3a4 4 0 0 0-4 0l-4 3c-2 1-5 1-6-1z"
+                fill="currentColor"/>
+            </svg>
+          </span>
+          <small>종료</small>
+        </button>
+
+        <button onclick="toast('키패드는 다음 단계에서 추가할게요.')">
+          <span>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              ${Array.from({length:9},(_,i)=>
+                `<circle cx="${14+(i%3)*10}" cy="${14+Math.floor(i/3)*10}" r="2.5" fill="currentColor"/>`
+              ).join("")}
+            </svg>
+          </span>
+          <small>키패드</small>
+        </button>
+      </div>
+    </div>`;
+}
+
 
 
   if (currentTab === "favorites") {
